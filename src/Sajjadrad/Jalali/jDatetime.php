@@ -94,8 +94,8 @@ class jDateTime
         //Timestamp + Timezone
         $stamp    = ($stamp != false) ? $stamp : time();
         $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
-        $obj      = new DateTime('@' . $stamp);
-        $obj->setTimezone(new DateTimeZone($timezone));
+        $obj      = new \DateTime('@' . $stamp);
+        $obj->setTimezone(new \DateTimeZone($timezone));
 
         if ( (self::$jalali === false && $jalali === null) || $jalali === false ) {
             return $obj->format($format);
@@ -181,7 +181,7 @@ class jDateTime
                         break;
                     //Year
                     case 'L':
-                        $tmpObj = new DateTime('@'.(time()-31536000));
+                        $tmpObj = new \DateTime('@'.(time()-31536000));
                         $v = $tmpObj->format('L');
                         break;
                     case 'o':
@@ -346,10 +346,10 @@ class jDateTime
         $date = $year.'-'.sprintf("%02d", $month).'-'.sprintf("%02d", $day).' '.$hour.':'.$minute.':'.$second;
 
         if ( self::$timezone != null || $timezone != null ) {
-            $obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
+            $obj = new \DateTime($date, new \DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
         }
         else {
-            $obj = new DateTime($date);
+            $obj = new \DateTime($date);
         }
 
         //Return
