@@ -1,7 +1,7 @@
-miladr/jalali
+sajjadrad/jalali
 ======
 
-This Package helps developers to easily work with Jalali (Shamsi or Iranian) dates in Laravel 4 applications, based on Jalali (Shamsi) DateTime class. This Package is based on a Laravel 3 bundle [sallar/laravel-jdate](https://github.com/sallar/laravel-jdate) by [Sallar Kaboli](http://sallar.me).
+This Package helps developers to easily work with Jalali (Shamsi or Iranian) dates in Laravel 4 applications, based on Jalali (Shamsi) DateTime class. This Package is based on a Laravel 3 bundle [sallar/laravel-jdate](https://github.com/sallar/laravel-jdate) by [Sallar Kaboli](http://sallar.me).This package converted from Laravel 3 bundle to Laravel 4 package by [Milad Rey](https://github.com/miladr/jalali).Older version of this library was unable to make a renge of numbers between two years in jalali with latin style.
 
 <a name="installation"></a>
 ## Installation
@@ -9,14 +9,14 @@ This Package helps developers to easily work with Jalali (Shamsi or Iranian) dat
 In the `require` key of `composer.json` file add the following
 
 ```yml
-    "miladr/jalali": "dev-master"
+    "sajjadrad/jalali": "dev-master"
 ```
 
 Run the Composer update comand
 
     $ composer update
 
-In your `config/app.php` add `'Miladr\Jalali\JalaliServiceProvider'` to the end of the `$providers` array
+In your `config/app.php` add `'Sajjadrad\Jalali\JalaliServiceProvider'` to the end of the `$providers` array
 
 ```php
     'providers' => array(
@@ -24,7 +24,7 @@ In your `config/app.php` add `'Miladr\Jalali\JalaliServiceProvider'` to the end 
         'Illuminate\Foundation\Providers\ArtisanServiceProvider',
         'Illuminate\Auth\AuthServiceProvider',
         ...
-        'Miladr\Jalali\JalaliServiceProvider',
+        'Sajjadrad\Jalali\JalaliServiceProvider',
 
     ),
 ```
@@ -61,6 +61,9 @@ $date = jDate::forge('2012-10-12')->reforge('+ 3 days')->format('date'); // 1391
 
 // get relative 'ago' format
 $date = jDate::forge('now - 10 minutes')->ago() // ۱۰ دقیقه پیش
+
+// Format function return number in persian style by default.You can convert it to latin style by init convert flag in argument.
+$date = jDate::forge(time())->format('Y',true);
 ```
 
 
@@ -75,4 +78,5 @@ The class relies on ``strtotime()`` to make sense of your strings, and ``strftim
 ## License ##
 - This bundle is created based on [Laravel-Date](https://github.com/swt83/laravel-date) by [Scott Travis](https://github.com/swt83) (MIT Licensed).  
 - [Jalali (Shamsi) DateTime](https://github.com/sallar/jDateTime) class included in the package is created by [Sallar Kaboli](http://sallar.me) and is released under the MIT License. 
-- This package was created by [Milad Rey](http://milad.io) and is released under the MIT License.
+- Older version was created by [Milad Rey](http://milad.io) and is released under the MIT License.
+_ This version is released under MIT license too.

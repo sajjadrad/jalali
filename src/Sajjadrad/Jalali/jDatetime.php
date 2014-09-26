@@ -1,4 +1,4 @@
-<?php namespace Miladr\Jalali;
+<?php namespace Sajjadrad\Jalali;
 /**
  * Jalali DateTime Class, supports years higher than 2038
  * by: Sallar Kaboli
@@ -36,6 +36,7 @@
  * @copyright  2003-2012 Sallar Kaboli
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link       http://sallar.me/projects/jdatetime/
+ * @edit       Sajjad Rad <sajjad.273@gmail.com>
  * @see        DateTime
  * @version    2.0.0
  */
@@ -93,8 +94,8 @@ class jDateTime
         //Timestamp + Timezone
         $stamp    = ($stamp != false) ? $stamp : time();
         $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
-        $obj      = new \DateTime('@' . $stamp);
-        $obj->setTimezone(new \DateTimeZone($timezone));
+        $obj      = new DateTime('@' . $stamp);
+        $obj->setTimezone(new DateTimeZone($timezone));
 
         if ( (self::$jalali === false && $jalali === null) || $jalali === false ) {
             return $obj->format($format);
@@ -180,7 +181,7 @@ class jDateTime
                         break;
                     //Year
                     case 'L':
-                        $tmpObj = new \DateTime('@'.(time()-31536000));
+                        $tmpObj = new DateTime('@'.(time()-31536000));
                         $v = $tmpObj->format('L');
                         break;
                     case 'o':
@@ -275,7 +276,7 @@ class jDateTime
      * @param $timezone string (Optional) forces a different timezone. pass null to use system default
      * @return string Formatted input
      */
-    public static function strftime($format, $stamp = false, $jalali = null, $timezone = null)
+    public static function strftime($format, $stamp = false,$convert=false, $jalali = null, $timezone = null)
     {
         $str_format_code = array(
             "%a", "%A", "%d", "%e", "%j", "%u", "%w",
@@ -301,9 +302,9 @@ class jDateTime
         $format = str_replace($str_format_code, $date_format_code, $format);
 
         //Convert to date
-        return self::date($format, $stamp, $jalali, $timezone);
+        return self::date($format, $stamp,$convert, $jalali, $timezone);
     }
-
+    
    /**
      * jDateTime::Mktime
      *
@@ -345,10 +346,10 @@ class jDateTime
         $date = $year.'-'.sprintf("%02d", $month).'-'.sprintf("%02d", $day).' '.$hour.':'.$minute.':'.$second;
 
         if ( self::$timezone != null || $timezone != null ) {
-            $obj = new \DateTime($date, new \DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
+            $obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
         }
         else {
-            $obj = new \DateTime($date);
+            $obj = new DateTime($date);
         }
 
         //Return
@@ -443,7 +444,7 @@ class jDateTime
             case '2': $ret = 'اردیبهشت'; break;
             case '3': $ret = 'خرداد'; break;
             case '4': $ret = 'تیر'; break;
-            case '5': $ret = 'امرداد'; break;
+            case '5': $ret = 'مرداد'; break;
             case '6': $ret = 'شهریور'; break;
             case '7': $ret = 'مهر'; break;
             case '8': $ret = 'آبان'; break;
